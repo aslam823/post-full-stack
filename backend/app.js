@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -5,8 +7,9 @@ const mongoose = require('mongoose');
 const Post = require('./models/post');
 
 const app = express();
+const dbURI = process.env.MONGODB_URI;
 
-mongoose.connect('mongodb+srv://aslam23143:HX1j2yMlYfz62uk3@cluster0.jyggaiq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(dbURI)
 .then(() => {
     console.log('Connected to database!')
 })
