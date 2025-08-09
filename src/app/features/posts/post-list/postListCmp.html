@@ -1,0 +1,15 @@
+<mat-accordion *ngIf="posts.length > 0">
+    <mat-expansion-panel *ngFor="let post of posts">
+        <mat-expansion-panel-header>{{post.title}}</mat-expansion-panel-header>
+        <p>{{post.content}}</p>
+        <mat-action-row>
+            <button class="edit-btn" matFab (click)="editPost()">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button class="delete-btn" matFab (click)="deletePost()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
+<p *ngIf="posts.length === 0">No Posts!</p>

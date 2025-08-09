@@ -1,0 +1,25 @@
+:host {
+display: block;
+margin-top: 1 rem;
+}
+
+mat-action-row {
+    gap: 5px;
+}
+
+.delete-btn {
+    color: darkred;
+    background: transparent;
+    border: none;
+}
+
+.edit-btn {
+    color: rgb(0, 106, 106);
+    background: transparent;
+    border: none;
+}
+
+.no-posts-inf0 {
+    text-align: center;
+    font-weight: 700;
+}
