@@ -1,5 +1,5 @@
 <mat-card>
-    <form action="" #postForm="ngForm" (ngSubmit)="onSavePost(postForm)">
+    <form action="" #postForm="ngForm" class="post-form" (ngSubmit)="onSavePost(postForm)">
         <mat-form-field>
             <input matInput name="title" #title="ngModel" ngModel placeholder="Post Title" minlength="3" required />
             <mat-error *ngIf="title.invalid">Reuired</mat-error>
