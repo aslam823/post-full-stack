@@ -8,19 +8,26 @@ import { MatInputModule } from "@angular/material/input";
 import { PostService } from "../postService";
 
 @Component({
-    selector: 'app-post-create',
-    templateUrl: './postCreateCmp.html',
-    styleUrls: ['./postCreateCmp.css'],
-    imports: [MatCardModule, CommonModule, MatButtonModule, MatInputModule, MatFormFieldModule, FormsModule]
+  selector: "app-post-create",
+  templateUrl: "./postCreateCmp.html",
+  styleUrls: ["./postCreateCmp.css"],
+  imports: [
+    MatCardModule,
+    CommonModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+  ],
 })
 export class PostCreate {
-    constructor(public postService: PostService) {}
+  constructor(public postService: PostService) {}
 
-    onSavePost(form: NgForm) {
-        if (form.invalid) {
-            return;
-        }
-        this.postService.addPost(form.value.title, form.value.content);
-        form.resetForm();
+  onSavePost(form: NgForm) {
+    if (form.invalid) {
+      return;
     }
+    this.postService.addPost(form.value.title, form.value.content);
+    form.resetForm();
+  }
 }

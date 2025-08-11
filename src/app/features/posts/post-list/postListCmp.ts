@@ -7,36 +7,37 @@ import { PostService } from "../postService";
 import { Subscription } from "rxjs";
 
 @Component({
-    selector: 'app-post-list',
-    templateUrl: './postListCmp.html',
-    styleUrls: ['./postListCmp.css'],
-    imports: [MatExpansionModule, CommonModule, MatIconModule]
+  selector: "app-post-list",
+  templateUrl: "./postListCmp.html",
+  styleUrls: ["./postListCmp.css"],
+  imports: [MatExpansionModule, CommonModule, MatIconModule],
 })
 export class PostList implements OnInit {
-    posts: Post[] = [];
-    private postsSub!: Subscription;
+  posts: Post[] = [];
+  private postsSub!: Subscription;
 
-    constructor(public postServive: PostService) {}
+  constructor(public postServive: PostService) {}
 
-    ngOnInit(): void {
-        this.postServive.getPosts();
-        this.postsSub = this.postServive.getPostUpdateListener()
-            .subscribe((posts: Post[]) => {
-                this.posts = posts;
-            });
+  ngOnInit(): void {
+    this.postServive.getPosts();
+    this.postsSub = this.postServive
+      .getPostUpdateListener()
+      .subscribe((posts: Post[]) => {
+        this.posts = posts;
+      });
+  }
+
+  ngDestroy(): void {
+    if (this.postsSub) {
+      this.postsSub.unsubscribe();
     }
+  }
 
-    ngDestroy(): void {
-        if (this.postsSub) {
-            this.postsSub.unsubscribe();
-        }
-    }
+  editPost() {
+    // Logic for editing a post can be implemented here
+  }
 
-    editPost() {
-        // Logic for editing a post can be implemented here
-    }
-
-    deletePost() {
-        // Logic for deleting a post can be implemented here
-    }
+  deletePost(id: string) {
+    this.postServive.deletePost(id);
+  }
 }

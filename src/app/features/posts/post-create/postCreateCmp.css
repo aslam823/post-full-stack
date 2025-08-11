@@ -1,12 +1,12 @@
 mat-card {
-    padding-left: 10px 0;
-    align-items: center;
+  padding-left: 10px 0;
+  align-items: center;
 
-    mat-form-field {
-        width: 80%;
-    }
+  mat-form-field {
+    width: 80%;
+  }
 }
 
-button{
-    display: flex;
+button {
+  display: flex;
 }
