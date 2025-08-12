@@ -2,6 +2,10 @@ mat-card {
   align-items: center;
 }
 
+mat-spinner {
+  margin: auto;
+}
+
 .post-form {
   display: flex;
   flex-direction: column;

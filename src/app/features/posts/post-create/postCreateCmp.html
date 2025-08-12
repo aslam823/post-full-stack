@@ -1,12 +1,13 @@
 <mat-card>
-    <form action="" #postForm="ngForm" class="post-form" (ngSubmit)="onSavePost(postForm)">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form action="" #postForm="ngForm" *ngIf="!isLoading" class="post-form" (ngSubmit)="onSavePost(postForm)">
         <mat-form-field>
-            <input matInput name="title" #title="ngModel" ngModel placeholder="Post Title" minlength="3" required />
+            <input matInput name="title" #title="ngModel" [ngModel]="post.title" placeholder="Post Title" minlength="3" required />
             <mat-error *ngIf="title.invalid">Reuired</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <textarea matInput rows="6" name="content" #content="ngModel" ngModel placeholder="Post Content"
+            <textarea matInput rows="6" name="content" #content="ngModel" [ngModel]="post.content" placeholder="Post Content"
                 minlength="3" required></textarea>
             <mat-error *ngIf="content.invalid">Reuired</mat-error>
         </mat-form-field>

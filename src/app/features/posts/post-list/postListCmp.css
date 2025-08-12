@@ -3,6 +3,10 @@
   margin-top: 1 rem;
 }
 
+mat-spinner {
+  margin: auto;
+}
+
 mat-action-row {
   gap: 5px;
 }
