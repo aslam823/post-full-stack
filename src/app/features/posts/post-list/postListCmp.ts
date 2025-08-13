@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   selector: "app-post-list",
   templateUrl: "./postListCmp.html",
   styleUrls: ["./postListCmp.css"],
-  imports: [MatExpansionModule, CommonModule, MatIconModule, RouterLink, MatProgressSpinnerModule],
+  imports: [MatExpansionModule, MatIconModule, RouterLink, MatProgressSpinnerModule, CommonModule],
 })
 export class PostList implements OnInit {
   posts: Post[] = [];
