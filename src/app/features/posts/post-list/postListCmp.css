@@ -31,7 +31,6 @@ mat-action-row {
 }
 
 .post-image {
-  width: 30%;
-  height: 30%;
+  height: 50%;
   object-fit: cover;
 }
