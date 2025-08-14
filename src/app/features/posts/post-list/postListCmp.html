@@ -5,7 +5,7 @@
         <img class="post-image" [src]="post.imagePath" [alt]="post.title" class="post-image">
         <p>{{post.content}}</p>
         <mat-action-row>
-            <a class="edit-btn" matFab (click)="editPost()" [routerLink]="['/edit', post.id]">
+            <a class="edit-btn" matFab [routerLink]="['/edit', post.id]">
                 <mat-icon>edit</mat-icon>
             </a>
             <button class="delete-btn" matFab (click)="deletePost(post.id)">
@@ -14,4 +14,9 @@
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
+<mat-paginator *ngIf="posts.length > 0" [length]="totalPosts"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="onPageChange($event)">
+</mat-paginator>
 <p *ngIf="posts.length === 0 && !isLoading">No Posts!</p>
