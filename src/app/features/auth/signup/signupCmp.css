@@ -1,0 +1,18 @@
+mat-card {
+  align-items: center;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px 0;
+}
+
+.signup-button {
+  width: fit-content;
+}

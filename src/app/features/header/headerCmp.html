@@ -1,9 +1,21 @@
 <mat-toolbar>
-    <span><a matButton routerLink="/">My Posts</a></span>
+    <span>My Posts</span>
     <span class="spacer"></span>
     <ul>
-        <li>
-            <a mat-button routerLink="/create">New Post</a>
+        <li *ngIf="isAuthenticated">
+            <a matButton="outlined" routerLink="/posts">All Posts</a>
+        </li>
+        <li *ngIf="isAuthenticated">
+            <a matButton="outlined" routerLink="/create">New Post</a>
+        </li>
+         <li *ngIf="!isAuthenticated">
+            <a matButton="outlined" routerLink="/login">Login</a>
+        </li>
+         <li *ngIf="!isAuthenticated">
+            <a matButton="outlined" routerLink="/signup">Signup</a>
+        </li>
+         <li *ngIf="isAuthenticated">
+            <button matButton="outlined" (click)="onLogout()">Logout</button>
         </li>
     </ul>
 </mat-toolbar>

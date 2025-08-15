@@ -6,7 +6,11 @@ import { App } from './app';
 import { PostList } from './features/posts/post-list/postListCmp';
 import { PostCreate } from './features/posts/post-create/postCreateCmp';
 import { Header } from './features/header/headerCmp';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { Login } from './features/auth/login/loginCmp';
+import { NgForm } from '@angular/forms';
+import { Signup } from './features/auth/signup/signupCmp';
+import { AuthInterceptor } from './features/auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -18,10 +22,13 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     PostCreate,
     Header,
-    PostList
+    PostList,
+    Login,
+    Signup
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [App]
 })
