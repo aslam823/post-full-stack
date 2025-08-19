@@ -1,10 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from "@angular/core";
+import { AuthService } from "./features/auth/authService";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.html',
+  selector: "app-root",
+  templateUrl: "./app.html",
   standalone: false,
-  styleUrl: './app.css'
+  styleUrl: "./app.css",
 })
-export class App {
+export class App implements OnInit {
+  constructor(private authService: AuthService) {}
+  ngOnInit() {
+    this.authService.autoAuthUser();
+  }
 }

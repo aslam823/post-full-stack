@@ -24,18 +24,18 @@ const onError = (error) => {
   }
 
   const bind = typeof addr === "string" ? "pipe" + addr : "port" + port;
-switch (error.code) {
-      case "EACCES":
-        console.error(bind + " requires elevated privileges");
-        process.exit(1);
-        break;
-      case "EADDRINUSE":
-        console.error(bind + " is already in use");
-        process.exit(1);
-        break;
-      default:
-        throw error;
-    }
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 };
 
 const onListening = () => {

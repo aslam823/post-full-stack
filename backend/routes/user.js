@@ -22,7 +22,6 @@ router.post("/signup", (req, res, next) => {
         res.status(500).json({
           error: error,
         });
-        console.error("Error creating user:", error);
       });
   });
 });
@@ -47,7 +46,8 @@ router.post("/login", (req, res, next) => {
           { expiresIn: "1h" }
         );
         res.status(200).json({
-          token: token
+          token: token,
+          expiresIn: 3600
         });
       });
     })
@@ -55,7 +55,6 @@ router.post("/login", (req, res, next) => {
       res.status(500).json({
         error: error,
       });
-      console.error("Error finding user:", error);
     });
 });
 

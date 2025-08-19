@@ -9,6 +9,8 @@ import { Router } from "@angular/router";
 })
 export class AuthService {
   private token: string = "";
+  private isAuthenticated = false;
+  private tokenTimer: number = 0;
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -19,6 +21,10 @@ export class AuthService {
 
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
+  }
+
+  getIsAuth() {
+    return this.isAuthenticated;
   }
 
   createUser(email: string, password: string) {
@@ -35,20 +41,58 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http
-      .post<{ token: string }>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{ token: string, expiresIn:number }>("http://localhost:3000/api/user/login", authData)
       .subscribe((response) => {
         if (response.token) {
+          const expiresInDuration = response.expiresIn;
+          this.setAuthTimer(expiresInDuration);
           this.token = response.token;
+          this.isAuthenticated = true;
           this.authStatusListener.next(true);
+          this.saveAuthData(this.token, new Date(new Date().getTime() + expiresInDuration * 1000));
           this.router.navigate(["/"]);
         }
       });
   }
 
+  autoAuthUser() {
+    const token = localStorage.getItem("token");
+    const expirationDate = localStorage.getItem("expiration");
+    if (!token || !expirationDate) {
+      return;
+    }
+    const expiresIn = new Date(expirationDate).getTime() - new Date().getTime();
+    if (expiresIn > 0) {
+      this.token = token;
+      this.isAuthenticated = true;
+      this.authStatusListener.next(true);
+      this.setAuthTimer(expiresIn/1000);
+      this.router.navigate(["/"]);
+    }
+  }
+
   logout() {
     this.token = "";
+    this.isAuthenticated = false;
     this.authStatusListener.next(false);
+    clearTimeout(this.tokenTimer);
+    this.clearAuthData();
     this.router.navigate(["/login"]);
+  }
+
+  private setAuthTimer(duration: number) {
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, duration * 1000);
+  }
+
+  private saveAuthData(token: string, expDate: Date) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("expiration", expDate.toISOString());
+  }
+
+  private clearAuthData() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiration");
   }
 }

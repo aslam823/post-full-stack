@@ -45,7 +45,6 @@ router.post("", checkAuth, multer({storage: storage}).single('image'), (req, res
       });
     })
     .catch((error) => {
-      console.error("Error creating post:", error);
       res.status(500).json({ message: "Creating post failed!" });
     });
 });
@@ -62,7 +61,6 @@ router.put("/:id", checkAuth, multer({storage: storage}).single('image'), (req, 
     content: req.body.content,
     imagePath: imagePath
   });
-  console.log("Updating post:", post);
   Post.updateOne({
     _id: req.params.id
   }, post).then((result) => {
@@ -94,15 +92,12 @@ router.get("/:id", checkAuth, (req, res, next) => {
   Post.findById(req.params.id)
     .then((post) => {
       if (post) {
-        console.log("Post fetched:", post);
         res.status(200).json(post);
       } else {
-        console.log("Post not found");
         res.status(404).json({ message: "Post not found!" });
       }
     })
     .catch((error) => {
-      console.error("Error fetching post:", error);
       res.status(500).json({ message: "Fetching post failed!" });
     });
 });
@@ -110,11 +105,9 @@ router.get("/:id", checkAuth, (req, res, next) => {
 router.delete("/:id", checkAuth, (req, res, next) => {
   Post.deleteOne({ _id: req.params.id })
     .then((result) => {
-      console.log("Post deleted:", result);
       res.status(200).json({ message: "Post deleted!" });
     })
     .catch((error) => {
-      console.error("Error deleting post:", error);
       res.status(500).json({ message: "Deleting post failed!" });
     });
 });
