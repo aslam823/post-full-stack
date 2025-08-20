@@ -11,6 +11,7 @@ export class AuthService {
   private token: string = "";
   private isAuthenticated = false;
   private tokenTimer: number = 0;
+  private currentUserId: string = "";
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -27,31 +28,40 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
+  getCurrentUserId() {
+    return this.currentUserId;
+  }
+
   createUser(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http.post("http://localhost:3000/api/user/signup", authData).subscribe(
-      (response) => {
-        console.log("User created successfully", response);
-      },
-      (error) => {
-        console.error("Error creating user", error);
-      }
-    );
+    this.http.post("http://localhost:3000/api/user/signup", authData).subscribe(() => {
+      this.router.navigate(["/login"]);
+    },
+    (error) => {
+      console.error("Signup failed:", error);
+      this.authStatusListener.next(false);
+      this.isAuthenticated = false;
+    });
   }
 
   login(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http.post<{ token: string, expiresIn:number }>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{ token: string, expiresIn:number, userId: string }>("http://localhost:3000/api/user/login", authData)
       .subscribe((response) => {
         if (response.token) {
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
           this.token = response.token;
+          this.currentUserId = response.userId;
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           this.saveAuthData(this.token, new Date(new Date().getTime() + expiresInDuration * 1000));
           this.router.navigate(["/"]);
         }
+      }, (error) => {
+        console.error("Login failed:", error);
+        this.authStatusListener.next(false);
+        this.isAuthenticated = false;
       });
   }
 

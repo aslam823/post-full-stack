@@ -11,6 +11,9 @@ import { Login } from './features/auth/login/loginCmp';
 import { NgForm } from '@angular/forms';
 import { Signup } from './features/auth/signup/signupCmp';
 import { AuthInterceptor } from './features/auth/auth-interceptor';
+import { ErrorInterceptor } from './error-interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorComponent } from './errorCmp';
 
 @NgModule({
   declarations: [
@@ -24,11 +27,14 @@ import { AuthInterceptor } from './features/auth/auth-interceptor';
     Header,
     PostList,
     Login,
-    Signup
+    Signup,
+    MatDialogModule,
+    ErrorComponent
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [App]
 })

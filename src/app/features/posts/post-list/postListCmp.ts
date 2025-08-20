@@ -24,7 +24,7 @@ export class PostList implements OnInit {
   currentPage: number = 1;
   private postsSub!: Subscription;
 
-  constructor(public postServive: PostService) {}
+  constructor(private postServive: PostService) {}
 
   ngOnInit(): void {
     this.isLoading = true;

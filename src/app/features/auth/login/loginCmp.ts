@@ -23,6 +23,7 @@ export class Login {
         }
         this.isLoading = true;
         this.authServive.login(form.value.email, form.value.password);
+        this.isLoading = false;
         form.resetForm();
     }
 }
