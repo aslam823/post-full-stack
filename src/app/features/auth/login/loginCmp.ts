@@ -9,8 +9,8 @@ import { AuthService } from "../authService";
 
 @Component({
     templateUrl: "./loginCmp.html",
-    imports: [MatCardModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule, CommonModule, FormsModule],
-    styleUrls: ["./loginCmp.css"]
+    styleUrls: ["./loginCmp.css"],
+    standalone: false,
 })
 export class Login {
     isLoading: boolean = false;

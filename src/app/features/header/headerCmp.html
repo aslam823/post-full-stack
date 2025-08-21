@@ -9,10 +9,10 @@
             <a matButton="outlined" routerLink="/create">New Post</a>
         </li>
          <li *ngIf="!isAuthenticated">
-            <a matButton="outlined" routerLink="/login">Login</a>
+            <a matButton="outlined" routerLink="/user/login">Login</a>
         </li>
          <li *ngIf="!isAuthenticated">
-            <a matButton="outlined" routerLink="/signup">Signup</a>
+            <a matButton="outlined" routerLink="/user/signup">Signup</a>
         </li>
          <li *ngIf="isAuthenticated">
             <button matButton="outlined" (click)="onLogout()">Logout</button>

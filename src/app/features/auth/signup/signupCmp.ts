@@ -10,8 +10,8 @@ import { Subscription } from "rxjs";
 
 @Component({
     templateUrl: "./signupCmp.html",
-    imports: [MatCardModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule, CommonModule, FormsModule],
-    styleUrls: ["./signupCmp.css"]
+    styleUrls: ["./signupCmp.css"],
+    standalone: false,
 })
 export class Signup implements OnInit, OnDestroy {
     isLoading: boolean = false;

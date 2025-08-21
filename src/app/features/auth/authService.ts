@@ -3,6 +3,9 @@ import { Injectable } from "@angular/core";
 import { AuthData } from "./auth-data";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
+import { environment } from "../../../environments/environments";
+
+const API_URL = environment.apiUrl + '/user';
 
 @Injectable({
   providedIn: "root",
@@ -34,8 +37,8 @@ export class AuthService {
 
   createUser(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http.post("http://localhost:3000/api/user/signup", authData).subscribe(() => {
-      this.router.navigate(["/login"]);
+    this.http.post( API_URL + "/signup", authData).subscribe(() => {
+      this.router.navigate(["/user/login"]);
     },
     (error) => {
       console.error("Signup failed:", error);
@@ -46,7 +49,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http.post<{ token: string, expiresIn:number, userId: string }>("http://localhost:3000/api/user/login", authData)
+    this.http.post<{ token: string, expiresIn:number, userId: string }>(API_URL + "/login", authData)
       .subscribe((response) => {
         if (response.token) {
           const expiresInDuration = response.expiresIn;
@@ -87,7 +90,7 @@ export class AuthService {
     this.authStatusListener.next(false);
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/user/login"]);
   }
 
   private setAuthTimer(duration: number) {

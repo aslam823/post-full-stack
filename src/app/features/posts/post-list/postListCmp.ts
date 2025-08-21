@@ -13,7 +13,7 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
   selector: "app-post-list",
   templateUrl: "./postListCmp.html",
   styleUrls: ["./postListCmp.css"],
-  imports: [MatExpansionModule, MatIconModule, RouterLink, MatProgressSpinnerModule, CommonModule, MatPaginatorModule],
+  standalone: false
 })
 export class PostList implements OnInit {
   posts: Post[] = [];

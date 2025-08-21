@@ -15,15 +15,7 @@ import { mimeType } from "./mime-type.validator";
   selector: "app-post-create",
   templateUrl: "./postCreateCmp.html",
   styleUrls: ["./postCreateCmp.css"],
-  imports: [
-    MatCardModule,
-    CommonModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatProgressSpinnerModule,
-    ReactiveFormsModule
-  ],
+  standalone: false,
 })
 export class PostCreate implements OnInit {
   mode = "create";

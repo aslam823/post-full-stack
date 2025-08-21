@@ -3,17 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { PostList } from './features/posts/post-list/postListCmp';
-import { PostCreate } from './features/posts/post-create/postCreateCmp';
 import { Header } from './features/header/headerCmp';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Login } from './features/auth/login/loginCmp';
-import { NgForm } from '@angular/forms';
 import { Signup } from './features/auth/signup/signupCmp';
 import { AuthInterceptor } from './features/auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './errorCmp';
+import { AngularMaterialModule } from './angular-material-module';
+import { PostsModule } from './features/posts/posts-module';
+import { AuthModule } from './features/auth/auth-module';
 
 @NgModule({
   declarations: [
@@ -23,13 +22,10 @@ import { ErrorComponent } from './errorCmp';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    PostCreate,
+    AngularMaterialModule,
     Header,
-    PostList,
-    Login,
-    Signup,
-    MatDialogModule,
-    ErrorComponent
+    ErrorComponent,
+    PostsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
