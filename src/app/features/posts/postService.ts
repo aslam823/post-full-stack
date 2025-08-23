@@ -3,8 +3,9 @@ import { Post } from "./post";
 import { map, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { environment } from "../../../environments/environment";
 
-const API_URL = 'http://localhost:8080/api/posts';
+const API_URL = environment.apiUrl + '/posts';
 
 @Injectable({
   providedIn: "root",
