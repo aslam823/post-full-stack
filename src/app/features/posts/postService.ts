@@ -3,7 +3,7 @@ import { Post } from "./post";
 import { map, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { environment } from "../../../environments/environments";
+import { environment } from "../../../environments/environment";
 
 const API_URL = environment.apiUrl + '/posts';
 
