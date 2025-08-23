@@ -3,9 +3,8 @@ import { Injectable } from "@angular/core";
 import { AuthData } from "./auth-data";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
-import { environment } from "../../../environments/environment";
 
-const API_URL = environment.apiUrl + '/user';
+const API_URL = 'http://localhost:8080/api/user';
 
 @Injectable({
   providedIn: "root",
